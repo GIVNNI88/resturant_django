@@ -1,0 +1,45 @@
+{% extends 'layout.html' %} {% block content %}
+<h1
+  style="
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke: 2px rgb(0, 0, 0);
+  "
+>משתמשים</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">שם משתמש</th>
+      <th scope="col">שם פרטי</th>
+      <th scope="col">שם משפחה</th>
+      <th scope="col">אימייל</th>
+      <th scope="col">דרגת הרשאה</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td scope="row">{{user.username}}</td>
+      <td>{{user.first_name}}</td>
+      <td>{{user.last_name}}</td>
+      <td>{{user.email}}</td>
+      {% if user.is_staff %}
+      <td>מנהל</td>
+      {% else %}
+      <td>
+        לקוח {% if request.user.is_superuser %}
+        <form action="{% url 'confirm_manager' id=user.id %}" method="POST">
+          {%csrf_token%}
+          <input type="checkbox" name="is_staff" />
+          <button type="submit">הפוך למנהל</button>
+        </form>
+        {% endif %}
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

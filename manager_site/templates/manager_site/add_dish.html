@@ -1,0 +1,80 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="card text-center">
+  <div class="card-header">
+    <h2>הוספת מנה:</h2>
+  </div>
+  <div class="card-body">
+    <form action="{% url 'add_dish' %}" method="POST">
+      {%csrf_token%}
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="name"
+          placeholder="שם המנה"
+        />
+        <div style="color: red">{{message}}</div>
+      </div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="price"
+          placeholder="מחיר המנה"
+        />
+        <div style="color: red">{{message2}}</div>
+      </div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="description"
+          placeholder="תיאור המנה"
+        />
+        <div style="color: red">{{message}}</div>
+      </div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="imageUrl"
+          placeholder="כתובת תמונה"
+        />
+        <div style="color: red">{{message}}</div>
+      </div>
+
+      <div class="form-control text-center">
+        <input type="hidden" name="is_vegeterian" value="False" />
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="is_vegeterian"
+          value="True"
+        />צמחוני
+      </div>
+      <div class="form-control text-center">
+        <input type="hidden" name="is_gluten_free" value="False" />
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="is_gluten_free"
+          value="True"
+        />ללא גלוטן
+      </div>
+      <div>
+        <select
+          class="form-control text-center"
+          aria-label="Default select example"
+          name="category"
+        >
+          <option value="" disabled selected>לחץ לבחירת קטגוריה</option>
+          {% for category in categories %}
+          <option value="{{category.id}}">{{category.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">העלאת מנה</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

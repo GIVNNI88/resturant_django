@@ -1,0 +1,52 @@
+{% extends 'layout.html' %} {% block content %}
+<h1
+  style="
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke: 2px rgb(0, 0, 0);
+  "
+>
+  עגלת קניות
+</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">שם המנה</th>
+      <th scope="col">קטגוריה</th>
+      <th scope="col">כמות</th>
+      <th scope="col">מחיר המנה</th>
+      <th scope="row">סה״כ</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in items %}
+    <tr>
+      <td scope="row">
+        <a class="nav-link" href="{% url 'remove' id=i.id %}"
+          >{{i.dish.name}}
+          <img
+            src="https://www.iconsdb.com/icons/preview/red/delete-xxl.png"
+            style="width: 20px; height: 20px"
+        /></a>
+      </td>
+      <td>{{i.dish.category}}</td>
+      <td>{{i.amount}}</td>
+      <td>{{i.dish.price}}</td>
+      <td></td>
+    </tr>
+    {% endfor %}
+    <tr style="border: 1px solid rgb(216, 206, 206)">
+      <td scope="row"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{total}}</td>
+    </tr>
+  </tbody>
+</table>
+<a href="{% url 'checkout' %}" class="btn btn-primary position-absolute end-0"
+  >לתשלום</a
+>
+{% endblock %}

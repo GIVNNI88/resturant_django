@@ -1,0 +1,45 @@
+{% extends 'layout.html' %} {% block content %}
+<h1
+  style="
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke: 2px rgb(0, 0, 0);
+  "
+>משלוחים</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">מספר הזמנה</th>
+      <th scope="col">כתובת הזמנה</th>
+      <th scope="col">הערות נוספות</th>
+      <th scope="col">תאריך הזמנה</th>
+      <th scope="col">הזמנה הגיע</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for delivery in deliveries %}
+    <tr>
+      <td scope="row">{{delivery.id}}</td>
+      <td>{{delivery.address}}</td>
+      <td>{{delivery.notes}}</td>
+      <td>{{delivery.created}}</td>
+      {% if delivery.is_delivered %}
+      <td>הושלמה</td>
+      {% else %}
+      <td>
+        במשלוח {% if request.user.is_superuser %}
+        <form action="{% url 'confirm_del' id=delivery.id %}" method="POST">
+          {%csrf_token%}
+          <input type="checkbox" name="is_delivered" />
+          <button type="submit">אישור הגעה</button>
+        </form>
+        {% endif %}
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

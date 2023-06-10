@@ -1,0 +1,50 @@
+{% extends 'layout.html' %} {% block content %}
+<h1
+  style="
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke: 2px rgb(0, 0, 0);
+  "
+>
+המשלוחים שלי</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">מספר הזמנה</th>
+      <th scope="col">כתובת הזמנה</th>
+      <th scope="col">הזמנה הגיע</th>
+      <th scope="col">הערות נוספות</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cart in carts %}
+    <tr>
+      <td scope="row">{{cart.delivery.id}}</td>
+      <td>{{cart.delivery.address}}</td>
+
+      {% if cart.delivery.is_delivered %}
+      <td>הושלמה</td>
+      {% else %}
+      <td>
+        במשלוח {% if request.user.is_superuser %}
+        <form
+          action="{% url 'confirm_del' id=cart.delivery.id %}"
+          method="POST"
+        >
+          {%csrf_token%}
+          <input type="checkbox" name="is_delivered" />
+          <button type="submit">אישור הגעה</button>
+        </form>
+        {% endif %}
+      </td>
+      {% endif %}
+
+      <td>{{cart.delivery.notes}}</td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

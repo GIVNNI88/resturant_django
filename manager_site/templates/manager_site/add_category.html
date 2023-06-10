@@ -1,0 +1,31 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="card text-center">
+  <div class="card-header">
+    <h2>הוספת קטגוריה:</h2>
+  </div>
+  <div class="card-body">
+    <form action="{% url 'add_category' %}" method="POST">
+      {%csrf_token%}
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="name"
+          placeholder="שם קטגוריה"
+        />
+        <div style="color: red">{{message}}</div>
+      </div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="imageUrl"
+          placeholder="כתובת תמונה"
+        />
+        <div style="color: red">{{message}}</div>
+      </div>
+      <button type="submit" class="btn btn-primary">הוספת קטגוריה</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="card text-center">
+  <div class="card-header">
+    <h3>הרשמה:</h3>
+  </div>
+  <div class="card-body">
+    <form action="{% url 'signup' %}" method="POST">
+      {%csrf_token%}
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="username"
+          placeholder="שם משתמש"
+        />
+        <div style="color: red">{{message}}</div>
+        <div style="color: red">{{message3}}</div>
+      </div>
+      <div>
+        <input
+          type="password"
+          class="form-control text-center"
+          name="password"
+          placeholder="סיסמה"
+        />
+        <div style="color: red">{{message}}</div>
+      </div>
+      <div>
+        <input
+          type="password"
+          class="form-control text-center"
+          name="password2"
+          placeholder="אשר סיסמה"
+        />
+        <div style="color: red">{{message}}</div>
+        <div style="color: red">{{message2}}</div>
+      </div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="first_name"
+          placeholder="שם פרטי"
+        />
+        <div style="color: red">{{message}}</div>
+      </div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="last_name"
+          placeholder="שם משפחה"
+        />
+        <div style="color: red">{{message}}</div>
+      </div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="email"
+          placeholder="כתובת אימייל"
+        />
+        <div style="color: red">{{message}}</div>
+        <div style="color: red">{{message4}}</div>
+      </div>
+      <button type="submit" class="btn btn-primary">הרשמה</button>
+    </form>
+
+    {% endblock %}
+  </div>
+</div>

@@ -1,0 +1,17 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="card text-center">
+  <div class="card-header">הפרטים שלי</div>
+  <div class="card-body">
+    <h4 class="card-title">שם משתמש: {{user.username}}</h4>
+    <p class="card-text">שם פרטי: {{user.first_name}}</p>
+    <p class="card-text">שם משפחה: {{user.last_name}}</p>
+    <p class="card-text">אימייל: {{user.email}}</p>
+    {% if request.user.is_staff %}
+    <p class="card-text">דרגת הרשאה: הנהלה</p>
+    {% else %}
+    <p class="card-text">דרגת הרשאה: לקוח רשום</p>
+    {% endif %}
+    <a href="{% url 'edit' %}" class="btn btn-primary">עריכת הפרטים שלי</a>
+  </div>
+</div>
+{% endblock %}

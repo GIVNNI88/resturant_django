@@ -1,0 +1,85 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="card text-center">
+  <div class="card-header">
+    <h2>עריכת מנה:</h2>
+  </div>
+  <div class="card-body">
+    <form action="{% url 'edit_dish' id=id %}" method="POST">
+      {%csrf_token%}
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="name"
+          placeholder="שם המנה"
+          value="{{dish.name}}"
+        />
+      </div>
+      <div style="color: red">{{message}}</div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="price"
+          placeholder="מחיר המנה"
+          value="{{dish.price}}"
+        />
+      </div>
+      <div style="color: red">{{message}}</div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="description"
+          placeholder="תיאור המנה"
+          value="{{dish.description}}"
+        />
+      </div>
+      <div style="color: red">{{message}}</div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="imageUrl"
+          placeholder="כתובת תמונה"
+          value="{{dish.imageUrl}}"
+        />
+      </div>
+      <div style="color: red">{{message}}</div>
+      <div class="form-control text-center">
+        <input type="hidden" name="is_vegeterian" value="False" />
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="is_vegeterian"
+          value="True"
+        />צמחוני
+      </div>
+      <div class="form-control text-center">
+        <input type="hidden" name="is_gluten_free" value="False" />
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="is_gluten_free"
+          value="True"
+        />ללא גלוטן
+      </div>
+      <div>
+        <select
+          class="form-control text-center"
+          aria-label="Default select example"
+          name="category"
+        >
+          <option value="{{dish.category_id}}" selected>
+            {{categoryName}}
+          </option>
+          {% for category in categories %}
+          <option value="{{category.id}}">{{category.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">אישור</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

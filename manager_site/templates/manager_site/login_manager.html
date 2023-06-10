@@ -1,0 +1,37 @@
+{% extends 'layout.html' %} {% block content %} {% if message %}
+<div
+  class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3"
+>
+  {{message}}
+</div>
+{% endif %}
+<div class="card text-center">
+  <div class="card-body">
+    <div class="card-header">
+      <h3>כניסת מנהל:</h3>
+    </div>
+    <form action="{% url 'login_manager' %}" method="POST">
+      {%csrf_token%}
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="username"
+          placeholder="שם משתמש"
+        />
+      </div>
+      <div>
+        <input
+          type="password"
+          class="form-control text-center"
+          name="password"
+          placeholder="סיסמה"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary">אישור</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

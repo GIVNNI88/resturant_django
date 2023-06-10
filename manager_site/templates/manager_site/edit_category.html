@@ -1,0 +1,34 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="card text-center">
+  <div class="card-header">
+    <h2>עריכת קטגוריה:</h2>
+  </div>
+  <div class="card-body">
+    <form action="{% url 'edit_cat' id=id %}" method="POST">
+      {%csrf_token%}
+
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="name"
+          placeholder="שם קטגוריה"
+          value="{{cat.name}}"
+        />
+      </div>
+      <div style="color: red">{{message}}</div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="imageUrl"
+          placeholder="כתובת תמונה"
+          value="{{cat.imageUrl}}"
+        />
+      </div>
+      <div style="color: red">{{message}}</div>
+      <button type="submit" class="btn btn-primary">אישור</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

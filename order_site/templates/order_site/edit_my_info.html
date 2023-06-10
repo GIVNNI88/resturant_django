@@ -1,0 +1,47 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="card text-center">
+  <div class="card-body">
+    <form action="{% url 'edit' %}" method="POST">
+      {%csrf_token%}
+      <div>
+        <input
+          type="password"
+          class="form-control text-center"
+          name="password"
+          placeholder="סיסמה"
+          value="{{user.password}}"
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="first_name"
+          placeholder="שם פרטי"
+          value="{{user.first_name}}"
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="last_name"
+          placeholder="שם משפחה"
+          value="{{user.last_name}}"
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="email"
+          placeholder="כתובת אימייל"
+          value="{{user.email}}"
+        />
+      </div>
+        <button type="submit" class="btn btn-primary">אישור</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

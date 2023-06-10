@@ -1,0 +1,33 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="card text-center">
+  <div class="card-header">
+    <h2>אנא הזינו את פרטי המשלוח</h2>
+  </div>
+  <div class="card-body">
+    <form action="{% url 'checkout' %}" method="POST">
+      {%csrf_token%}
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="address"
+          placeholder="כתובת"
+        />
+      </div>
+      <div style="color: red">{{message}}</div>
+      <div>
+        <input
+          type="text"
+          class="form-control text-center"
+          name="notes"
+          placeholder="הערות"
+        />
+      </div>
+      <div style="color: red">{{message}}</div>
+      <div>
+        <button type="submit" class="btn btn-primary">אישור הזמנה</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
